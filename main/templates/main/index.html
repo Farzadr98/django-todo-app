@@ -1,0 +1,38 @@
+{% extends 'main/main.html' %}
+{% block content %}
+    <h1>Todo App</h1>
+    {% if request.user.is_authenticated %}
+        <h2>Hello {{ request.user.username }}</h2>
+
+        <a href="/todo">
+            <button>Create a Todo</button>
+        </a>
+        <a href="{% url 'login' %}">
+            <button class="nevermind">Logout</button>
+        </a>
+
+
+            {% if todos %}
+
+            <div class="spacer">
+
+            </div>
+
+             <h3>Todos:</h3>
+                {% for todo in todos %}
+                    <hr/>
+                    <div class="todo-container">
+                        <h3>{{ todo.title }}</h3>
+                        <a href="{% url 'todo_detail' pk=todo.id %}">
+                            <button class="todobutton">view</button>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+    {% else %}
+        <a href="/login">
+            <button>Login or Register</button>
+        </a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'main/main.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h2>Are you sure, do you want to log out?</h2>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <button class="nevermind" type="submit">Logout</button>
+        </form>
+    {% else %}
+        <h1>Login or register</h1>
+        <p>If you have an account just fill username and password</p>
+        <p>If you don't, fill with your desired username and passowrd and your account will be created</p>
+        <hr/>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <label for="username">
+                Username:
+            </label>
+            <input name="username" id="username" type="text">
+            <label for="password">
+                Password:
+            </label>
+            <input name="password" id="password" type="password">
+            <button type="submit">Login or Register</button>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'main/main.html' %}
+{% block content %}
+<h3>Title: {{ title }}</h3>
+<hr/>
+<p>{{ description }}</p>
+<a href="{% url 'index' %}">
+    <button>Go back</button>
+</a>
+<form action="{% url 'todo_detail' id %}" method="post">
+    {% csrf_token %}
+    <button class="nevermind">Delete</button>
+</form>
+{% endblock %}
